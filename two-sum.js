@@ -12,22 +12,23 @@
 
 
 const twoSum = function(nums, target) {
-  
+    
   const complements = nums.map(n => target - n);
-
-  const intersectMinusSameIndex = nums.filter((num, i) => {
-    const complementsCopy = [...complements];
-    complementsCopy.splice(i, 1);
-    return complementsCopy.includes(num);
-    // return -1 < complements.findIndex((n, j) => num === n && i !== j );
-  });
-
-  const [first, second] = intersectMinusSameIndex;
-  const firstIndex = nums.findIndex(n => n === first);
-  const secondIndex = nums.findIndex((n, i) => n === second && i !== firstIndex);
-
-  return [firstIndex, secondIndex];
   
+  const first = nums.findIndex((num, index) => {
+      
+    //found the number if its in complements and at a different index than 
+    const foundInComplements = complements.findIndex((n, i) => {
+      console.log({num, n, index, i});
+      return n === num && index !== i;
+    });
+    
+    return foundInComplements >= 0; 
+  });
+    
+  const second = nums.findIndex((n, i) => n === target - nums[first] && first !== i);
+    
+  return [first, second];
 };
 
 // console.log(twoSum([11,15,5,8], 13));
