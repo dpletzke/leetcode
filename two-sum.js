@@ -15,12 +15,14 @@ const twoSum = function(nums, target) {
   
   const complements = nums.map(n => target - n);
 
-  const findComplementsNoReuse = nums.filter((num, i) => {
-    return complements.find((n, j) => num === n && i !== j );
+  const intersectMinusSameIndex = nums.filter((num, i) => {
+    const complementsCopy = [...complements];
+    complementsCopy.splice(i, 1);
+    return complementsCopy.includes(num);
+    // return -1 < complements.findIndex((n, j) => num === n && i !== j );
   });
 
-  // console.log(findComplementsNoReuse);
-  const [first, second] = findComplementsNoReuse;
+  const [first, second] = intersectMinusSameIndex;
   const firstIndex = nums.findIndex(n => n === first);
   const secondIndex = nums.findIndex((n, i) => n === second && i !== firstIndex);
 
@@ -36,7 +38,8 @@ const twoSum = function(nums, target) {
 // console.log()
 // console.log(twoSum([3,3], 6));
 // console.log()
-console.log(twoSum([0, 4, 3, 0], 0));
+// console.log(twoSum([0, 4, 3, 0], 0));
+console.log(twoSum([-3, 4, 3, 90], 0));
 
 // const nums = 3, 2, 4
 // const comps = 3, 4, 2
