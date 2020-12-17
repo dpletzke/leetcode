@@ -8,17 +8,17 @@ const isValid = function(s) {
   // order must be so that all internal brackets must be closable
   // within each match verify that each bracket side has the same number
 
-  const parensCheck = s.match(/[(]/g).length === s.match(/[)]/g).length;
-  const sqCheck = s.match(/[[]/g).length === s.match(/[\]]/g).length;
-  const curCheck = s.match(/[{]/g).length === s.match(/[}]/g).length;
+  const parensCheck = s.match(/[(]/g)?.length === s.match(/[)]/g)?.length;
+  const sqCheck = s.match(/[[]/g)?.length === s.match(/[\]]/g)?.length;
+  const curCheck = s.match(/[{]/g)?.length === s.match(/[}]/g)?.length;
 
   if (!parensCheck || !sqCheck || !curCheck) return false;
 
-  const regexParen = s.match(/[(].*[)]/g);
-  const regexSq = s.match(/[[].*[\]]/g);
-  const regexCur = s.match(/[{].*[}]/g);
+  const regexParen = s.match(/[(].*[)]/g) || [];
+  const regexSq = s.match(/[[].*[\]]/g) || [];
+  const regexCur = s.match(/[{].*[}]/g) || [];
 
-  return [ , , ];
+  return [...regexParen, ...regexSq, ...regexCur].every(m => isValid(m.slice(1, -1)));
 };
 
 const testArr = ["()", "()[]{}", "(]", "([)]", "{[]}", "()[{()[]}()]", "{{}}"];
