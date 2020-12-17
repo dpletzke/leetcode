@@ -1,33 +1,29 @@
-const replaceByRecursion = (s, reg, val) => {
-  if (!reg.test(s)) return s;
-  const buffer = s.replace(reg, val);
-  console.log(buffer);
-  return replaceByRecursion(buffer, reg, val);
-};
-
 /**
- * Returns true if all brackets have correct closing order brackets;
  * @param {string} s
  * @return {boolean}
  */
-const isValid = function(s) {
-  // recursively remove matched parens,
-  // if nothing to remove and more left, return false
 
-  const parensCheck = s.match(/[(]/g)?.length === s.match(/[)]/g)?.length;
-  const sqCheck = s.match(/[[]/g)?.length === s.match(/[\]]/g)?.length;
-  const curCheck = s.match(/[{]/g)?.length === s.match(/[}]/g)?.length;
+const ref = {
+  '[': ']',
+  '{': '}',
+  '(': ')',
+};
+const isValid = function (s) {
+  const stack = [];
 
-  if (!parensCheck || !sqCheck || !curCheck) {
-    return false;
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (ref[c]) {
+      stack.push(ref[c]);
+    } else if (c !== stack.pop()) {
+      return false;
+    }
   }
 
-  const replaced = replaceByRecursion(s, /((\(\))|(\[])|({}))/g, '');
-
-  return replaced.length === 0;
+  return !stack.length;
 };
 
-const testArr = ["()", "()[]{}", "(]", "([)]", "{[]}", "()[{()[]}()]", "{{}}"];
+const testArr = ['()', '()[]{}', '(]', '([)]', '{[]}', '()[{()[]}()]', '{{}}'];
 
 testArr.forEach(s => {
   console.log();
