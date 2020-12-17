@@ -2,11 +2,11 @@
  * @param {string[]} strs
  * @return {string}
  */
-const longestCommonPrefix = function(strs) {
+const longestCommonPrefix = function (strs) {
   const firstS = strs[0];
   let letters = '';
 
-  if(!strs.length) return '';
+  if (!strs.length) return '';
 
   for (let i = 0; i <= firstS.length; i++) {
 
@@ -26,7 +26,7 @@ const tests = [
   ['fast', 'fat', 'skill', 'fib'],
   ['elephant', 'elephants', 'elephantman', 'elephantphobia'],
   [],
-  ["c","acc","ccc"],
+  ['c', 'acc', 'ccc'],
 ];
 
 for (const t of tests) {
