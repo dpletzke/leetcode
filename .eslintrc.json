@@ -15,6 +15,8 @@
       "func-names":"off",
       "max-len":["error", { "code": 80 }],
       "arrow-parens": "off",
-      "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+      "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+      "padded-blocks": "off",
+      "no-restricted-syntax": "off"
     }
 }
