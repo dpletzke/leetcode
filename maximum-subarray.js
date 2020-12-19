@@ -3,41 +3,10 @@
  * @return {number}
  */
 const maxSubArray = function (nums) {
-
-  let max = -Infinity;
-  const ledger = nums.reduce(acc => {
-    acc.push([]);
-    return acc;
-  }, []);
-
-  for (let i = 0; i < nums.length; i++) {
-
-    const num = nums[i];
-    console.log({ max, num, ledger });
-
-    if (max < num) {
-      max = num;
-    }
-    if (i >= 1) {
-      ledger[0] += num;
-      if (ledger[0] > max) {
-        max = ledger[0];
-      }
-    }
-    ledger[0] = num;
-
-    if (i >= 2) {
-      ledger[1][0] += num;
-      ledger[1][1] += num;
-      if (ledger[1][0] > max) max = ledger[1][0];
-      ledger.unshift();
-      ledger.push(num);
-    } if (i >= 1) {
-      ledger[1][0] += num;
-    }
-    ledger[1].push(num);
+  for (let i = 1; i < nums.length; i++) {
+    nums[i] = Math.max(nums[i], nums[i] + nums[i - 1]);
   }
-  return max;
+  return Math.max(...nums);
 };
 
 console.log(maxSubArray([1, -2, 3]));
