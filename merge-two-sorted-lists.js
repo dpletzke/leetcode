@@ -56,37 +56,21 @@ const fakeLL = (n) => {
 // };
 
 const mergeTwoLists = function (l1, l2) {
-
-  if (!l1 && l2) return l2;
-  if (l1 && !l2) return l1;
-  if (!l1 && !l2) return null;
-
-  let mergeList;
-  let lastElement;
-
-  const mergeNext = (e1, e2) => {
-    console.log(JSON.stringify(e1), JSON.stringify(e2));
-    console.log();
-    const valCheck = e1.val <= e2.val;
-    if (!mergeList) {
-      mergeList = valCheck ? e1 : e2;
-      mergeList.next = valCheck ? e2 : e1;
-      lastElement = mergeList.next;
+  const mergedHead = { val: -1, next: null };
+  let last = mergedHead;
+  while (l1 && l2) {
+    if (l1.val > l2.val) {
+      last.next = l2;
+      l2 = l2.next;
     } else {
-      lastElement.next = valCheck ? e1 : e2;
-      lastElement.next.next = valCheck ? e2 : e1;
-      lastElement = valCheck ? e2 : e1;
+      last.next = l1;
+      l1 = l1.next;
     }
-    const next1 = e1.next;
-    const next2 = e2.next;
+    last = last.next;
+  }
+  last.next = l1 || l2;
 
-    if (next1 || next2) mergeNext(next1, next2);
-  };
-
-  mergeNext(l1, l2);
-
-  return mergeList;
-
+  return mergedHead.next;
 };
 
 console.log(JSON.stringify(mergeTwoLists(fakeLL(3), fakeLL(4))));
