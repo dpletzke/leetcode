@@ -17,6 +17,7 @@
       "arrow-parens": "off",
       "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
       "padded-blocks": "off",
-      "no-restricted-syntax": "off"
+      "no-restricted-syntax": "off",
+      "arrow-body-style": "off"
     }
 }
