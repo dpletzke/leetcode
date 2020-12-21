@@ -5,17 +5,18 @@
 const countAndSay = function (n) {
   let str = '1';
   for (let i = 0; i < n - 1; i++) {
-    const arr = str.split('');
-    str = '';
+    let newString = '';
     let count = 0;
 
-    for (let j = 0; j < arr.length; j++) {
+    for (let j = str.length - 1; j >= 0; j--) {
       count += 1;
-      if (arr[j] !== arr[j + 1]) {
-        str += `${count}${arr[j]}`;
+      const thisChar = str.charAt(j);
+      if (thisChar !== str.charAt(j - 1)) {
+        newString = `${count}${thisChar}${newString}`;
         count = 0;
       }
     }
+    str = newString;
   }
 
   return str;
