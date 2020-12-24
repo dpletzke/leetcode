@@ -2,7 +2,7 @@
  * @param {string} s
  * @return {number}
  */
-const lengthOfLastWord = function(s) {
+const lengthOfLastWord = function (s) {
   const words = s.trim().split(' ').reverse();
   console.log(words);
   return words[0] ? words[0].length : 0;
