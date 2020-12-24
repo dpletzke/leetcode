@@ -11,7 +11,7 @@ const plusOne = function (digits) {
       if (currentIndex === 0) {
         digits.unshift(1);
         adding = false;
-      };
+      }
       currentIndex -= 1;
     } else {
       digits[currentIndex] += 1;
