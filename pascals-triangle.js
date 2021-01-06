@@ -9,12 +9,14 @@ const generate = function(numRows) {
   const output = [[1], [1, 1]];
 
   for (let i = 2; i < numRows; i++) {
-    output[i] = [];
-    for (let j = output[i - 1].length - 2; j >= 0; j--) {
-      output[i].unshift(output[i - 1][j + 1] + output[i - 1][j]);
-    }
-    output[i].push(1);
-    output[i].unshift(1);
+    output[i] = [
+      1,
+      ... output[i - 1].reduce((acc, n, i, arr) => {
+        if (arr[i + 1]) acc.push(n + arr[i + 1]);
+        return acc;
+      }, []),
+      1,
+    ];
   }
   return output;
 };
