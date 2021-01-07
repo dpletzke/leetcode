@@ -5,14 +5,20 @@
 const singleNumber = (nums) => {
 
   const ledger = new Map();
-  for (let i = nums.length; i >= 0; i--) {
+  while (nums.length - 1 >= 0) {
+    const len = nums.length - 1;
 
-    if (ledger.has(nums[i])) ledger.delete(nums[i]);
-    else ledger.set(nums[i], 1);
-
+    
+    if (ledger.has(nums[len])) {
+      ledger.delete(nums[len]);
+      nums.pop();
+    } else {
+      ledger.set(nums.pop(), 1);
+    }
+    
   }
 
-  return Array.from(ledger.keys())[1];
+  return Array.from(ledger.keys())[0];
 
 };
 
