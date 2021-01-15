@@ -9,8 +9,7 @@ const maxArea = function (height) {
     const leftMax = height[i];
     for (let j = height.length - 1; j > i; j--) {
       if (leftMax * (j - 1) < maxSquare) break;
-      const currentArea = (j - i) * Math.min(leftMax, height[j]);
-      if (currentArea > maxSquare) maxSquare = currentArea;
+      maxSquare = Math.max(maxSquare, (j - i) * Math.min(leftMax, height[j]));
     }
   }
 
