@@ -5,12 +5,13 @@
 const maxArea = function (height) {
 
   let maxSquare = 0;
-  for (let i = 0; i < height.length; i++) {
-    const leftMax = height[i];
-    for (let j = height.length - 1; j > i; j--) {
-      if (leftMax * (j - 1) < maxSquare) break;
-      maxSquare = Math.max(maxSquare, (j - i) * Math.min(leftMax, height[j]));
-    }
+  let i = 0;
+  let j = height.length - 1;
+
+  while (i !== j) {
+    maxSquare = Math.max(maxSquare, (j - i) * Math.min(height[i], height[j]));
+    if (height[i] > height[j]) j--;
+    else i++;
   }
 
   return maxSquare;
