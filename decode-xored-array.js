@@ -4,13 +4,14 @@
  * @return {number[]}
  */
 const decode = function(encoded, first) {
-  encoded.unshift(first);
+  encoded.reverse();
+  encoded.push(first);
 
-  for (let i = 1; i < encoded.length; i++) {
-    encoded[i] ^= encoded[i - 1];
+  for (let i = encoded.length - 2; i >= 0; i--) {
+    encoded[i] ^= encoded[i + 1];
   }
 
-  return encoded;
+  return encoded.reverse();
 
 };
 
