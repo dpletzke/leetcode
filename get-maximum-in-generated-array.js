@@ -11,17 +11,20 @@
 // nums[2 * i + 1] = nums[i] + nums[i + 1] when 2 <= 2 * i + 1 <= n
 // Return the maximum integer in the array nums​​​
 const getMaximumGenerated = (n) => {
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+  if (n === 2) return 1;
   const nums = [0, 1];
-  let max = 0
-  for (let i = 0; i <= n && nums.length < n + 1; i++) {
+  let max = 0;
+  for (let i = 0; nums.length < n; i++) {
     nums[2 * i] = nums[i];
     nums[2 * i + 1] = nums[i] + nums[i + 1];
-    // max = Math.max(max, nums[i] + nums[i + 1]);
+    max = Math.max(max, nums[i] + nums[i + 1]);
   }
 
-  return nums;
+  return max;
 
 };
 
 
-console.log(getMaximumGenerated(4));
+console.log(getMaximumGenerated(7));
