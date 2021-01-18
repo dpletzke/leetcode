@@ -8,7 +8,7 @@ const maximumUnits = (boxTypes, truckSize) => {
   let units = 0;
 
   while (truckSize > 0) {
-    if (!boxTypes) return units;
+    if (!boxTypes.length) return units;
     const [boxNum, boxSize] = boxTypes.pop();
     const boxesToAdd = Math.min(truckSize, boxNum);
     units += boxesToAdd * boxSize;
