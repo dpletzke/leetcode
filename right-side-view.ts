@@ -1,13 +1,14 @@
 function rightSideView(root: TreeNode | null): number[] {
+  if (!root) return [];
+
   let left = [];
   let right = [];
 
-  if (root.left) left = [root.val, ...rightSideView(root.left)];
-  if (root.right) right = [root.val, ...rightSideView(root.right)];
+  if (root && root.left) left = rightSideView(root.left);
+  if (root && root.right) right = rightSideView(root.right);
 
   if (left && left.length > right.length)
     right.push(...left.slice(right.length));
 
-  console.log({ left, right });
-  return right;
+  return [root.val, ...right];
 }
