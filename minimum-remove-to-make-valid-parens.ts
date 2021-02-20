@@ -1,8 +1,10 @@
 function minRemoveToMakeValid(s: string): string {
   const stack: string[] = [];
-  const output: string[] = [];
-  s.split("").forEach((ch: string): void => {
+  const output: string[] = s.split("");
+
+  output.forEach((ch: string, i: number): void => {
     if (ch === ")" && !stack.length) {
+      output[i] = "";
       return;
     }
     if (ch === "(") {
@@ -11,14 +13,13 @@ function minRemoveToMakeValid(s: string): string {
     if (ch === ")" && stack.length) {
       stack.pop();
     }
-    output.push(ch);
+    output[i] = ch;
   });
-
   stack.length = 0;
-  const output2 = [];
 
-  output.reverse().forEach((ch: string): void => {
+  output.reverse().forEach((ch: string, i: number): void => {
     if (ch === "(" && !stack.length) {
+      output[i] = "";
       return;
     }
     if (ch === ")") {
@@ -27,10 +28,10 @@ function minRemoveToMakeValid(s: string): string {
     if (ch === "(" && stack.length) {
       stack.pop();
     }
-    output2.push(ch);
+    output[i] = ch;
   });
 
-  return output2.reverse().join("");
+  return output.reverse().join("");
 }
 
 console.log(minRemoveToMakeValid("a)b(c)d"));
